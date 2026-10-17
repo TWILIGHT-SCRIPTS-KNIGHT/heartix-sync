@@ -1,0 +1,28 @@
+name: validate-sync
+
+on:
+  push:
+    paths:
+      - heartix-sync.json
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate heartix-sync.json
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          with open("heartix-sync.json", "rb") as fh:
+              data = json.load(fh)
+          for key in ("Seq", "Text", "Sender", "TimestampMs"):
+              assert key in data, f"missing key: {key}"
+          assert isinstance(data["Text"], str), "Text must be a string"
+          assert isinstance(data["TimestampMs"], int), "TimestampMs must be an int"
+          print("ok:", repr(data["Text"])[:60], "len", len(data["Text"]))
+          PY
