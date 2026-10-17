@@ -1,8 +1,1 @@
-{
-    "Version":  "1.0.1",
-    "Announcement":  "BBBB",
-    "Sha256":  "",
-    "PublishedAt":  0,
-    "Url":  "https://example.com/x.exe",
-    "Notes":  "n"
-}
+{"Version":"1.0.1","Url":"u","Notes":"n","Announcement":"CCCC","Sha256":"","PublishedAt":0}
